@@ -27,7 +27,7 @@ class Users_model extends CI_Model{
 	}
 
 	public function user_verify($mobile = ""){
-		$sql = "SELECT user_login.id FROM user_login
+		$sql = "SELECT user_login.id, company FROM user_login
 				LEFT JOIN users ON users.id = user_login.user_id
 				WHERE users.phone = '" . $mobile . "'
 				ORDER by user_login.created_date DESC LIMIT 1";

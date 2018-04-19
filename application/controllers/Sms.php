@@ -26,10 +26,11 @@ class Sms extends CI_Controller {
 
 		$from = $this->input->get("from");
 		$msg = $this->input->get("msg");
-		$imei = $this->session->userdata("imei");
 
 		$user_login = $this->users_model->user_verify($from);
 		$user_login = reset($user_login);
+
+		$imei = $user_login['company'];
 
 		$xor = base64_decode($msg);
 		$ct = $this->xor_string($xor, $imei);
