@@ -32,7 +32,7 @@ class Users_model extends CI_Model{
 				WHERE users.phone = '+" . trim($mobile) . "'
 				ORDER by user_login.created_date DESC LIMIT 1";
 		
-		$query = $this->db->query($sql);
+		$query = $this->db->query($sql);     log_message("debug", $this->db->last_query(), false);
 
 		return $query->result();
 	}

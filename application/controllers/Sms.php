@@ -29,6 +29,7 @@ class Sms extends CI_Controller {
 		$msg = $this->input->get("msg");
 
 		$user_login = $this->users_model->user_verify($from);
+		log_message("debug", "USER LOGIN: " . print_r($user_login, 1), false);
 		$user_login = reset($user_login);
 		$cipher = $this->users_model->getCipherText($user_login->id);
 
