@@ -41,7 +41,7 @@ class Sms extends CI_Controller {
 			$data = array(
 				"verified_date" => date("Y-m-d H:i:s"),
 				"status" => 1,
-				"receive_time"=>$receive_time,
+				"received_time"=>$receive_time,
 				"verified_time"=>$verified_time
 			);
 
