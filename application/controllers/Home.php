@@ -14,12 +14,12 @@ class Home extends CI_Controller {
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
-			redirect('auth/login', 'refresh');
+			//redirect('auth/login', 'refresh');
 		}else{
 			$user_login = $this->users_model->get_user_login($this->session->userdata("user_login"));
 
 			if($user_login[0]['verified_date'] == ""){
-				redirect("auth/verify");
+				//redirect("auth/verify");
 			}
 
 		}
@@ -28,7 +28,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$data['user_login'] = $this->users_model->get_user_login($this->session->userdata('user_login'));
+		$data['user_login'] = $this->users_model->get_user_login(3);
 		$this->load->view('dashboard', $data);
 	}
 }

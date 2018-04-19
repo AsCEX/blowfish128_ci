@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<div class="login" style="width:750px;color: #fff;text-align: center;margin: -350px 0 0 -350px;">
+	<div class="dashboard" style="width:100%;padding:0 50px;color: #fff;text-align: center;margin: 20px auto;">
 
 		<h1>Successfully Logged In!</h1>
 		<br />
@@ -16,7 +16,7 @@
 
 		<br /><br />
 
-		<table class="table table-striped">
+		<table class="table table-striped" style="font-size:12px;">
 			<tr>
 				<th>Encrypted Text</th>
 				<th>Processing Time</th>
@@ -26,6 +26,7 @@
 			<?php foreach($user_login as $user): ?>
 				<?php
 					$time = $user['encrypt_end'] - $user['encrypt_start'];
+					$vtime = $user['received_time'] - $user['verified_time'];
 				?>
 				<tr>
 					<td><?php echo $user['encrypted_text']; ?></td>
@@ -34,7 +35,9 @@
 						<?php echo sprintf("%.6f ",($time)*1000); ?> milliseconds
 					</td>
 					<td><?php echo $user['created_date']; ?></td>
-					<td><?php echo $user['verified_date']; ?></td>
+					<td><?php echo $user['verified_date']; ?>       <br />
+						<?php echo sprintf("%.6f ",($vtime)*1000); ?> milliseconds
+					</td>
 				</tr>
 			<?php endforeach; ?>
 		</table>
