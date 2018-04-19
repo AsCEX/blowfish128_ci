@@ -43,9 +43,14 @@ class Users_model extends CI_Model{
 		$this->db->update('user_login', $data);
 	}
 
-	public function getCipherText(){
+	public function getCipherText($id = null){
+
+		if(!$id){
+			$id = $this->session->userdata("user_login");
+		}
+
 		$sql = "SELECT encrypted_text FROM user_login WHERE id = ?";
-		$query = $this->db->query($sql, array($this->session->userdata("user_login")));
+		$query = $this->db->query($sql, array($id));
 
 		$result = $query->result();
 

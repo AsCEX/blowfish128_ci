@@ -22,13 +22,13 @@ class Sms extends CI_Controller {
 		$receive_time = microtime(true);
 		
 		$this->load->model("users_model");
-		$cipher = $this->users_model->getCipherText();
 
 		$from = $this->input->get("from");
 		$msg = $this->input->get("msg");
 
 		$user_login = $this->users_model->user_verify($from);
 		$user_login = reset($user_login);
+		$cipher = $this->users_model->getCipherText($user_login->id);
 
 		$imei = $user_login->company;
 
