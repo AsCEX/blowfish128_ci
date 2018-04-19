@@ -20,7 +20,9 @@ class Sms extends CI_Controller {
 	public function verify(){
 
 		$receive_time = microtime(true);
-		
+
+		log_message("debug", "Received Time: " . $receive_time, false);
+
 		$this->load->model("users_model");
 
 		$from = $this->input->get("from");
@@ -30,10 +32,14 @@ class Sms extends CI_Controller {
 		$user_login = reset($user_login);
 		$cipher = $this->users_model->getCipherText($user_login->id);
 
+		log_message("debug", "CIPHER TEXT: " . $cipher, false);
+
 		$imei = $user_login->company;
 
 		$xor = base64_decode($msg);
 		$ct = $this->xor_string($xor, $imei);
+
+		log_message("debug", "XOR TEXT: " . $ct, false);
 		if($ct == $cipher){
 
 			$verified_time = microtime(true);
