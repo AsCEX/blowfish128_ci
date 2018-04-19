@@ -30,7 +30,7 @@ class Sms extends CI_Controller {
 		$user_login = $this->users_model->user_verify($from);
 		$user_login = reset($user_login);
 
-		$imei = $user_login['company'];
+		$imei = $user_login->company;
 
 		$xor = base64_decode($msg);
 		$ct = $this->xor_string($xor, $imei);
@@ -45,7 +45,7 @@ class Sms extends CI_Controller {
 				"verified_time"=>$verified_time
 			);
 
-			$this->users_model->verifyLogin($user_login['id'], $data);
+			$this->users_model->verifyLogin($user_login->id, $data);
 		}
 
 	}
