@@ -88,17 +88,19 @@
 		$.ajax({
 			url: "<?php echo site_url("sms/get_unread_messages"); ?>",
 			success: function(response){
-				if(response.success == true){
+				if(response.success){
 				    
 					$("#alert-msg").html(response.msg);
 					$("#alert-msg").attr("class", "");
+//					clearInterval(verifyTimer);
+					$(".lds-css").hide();
+					window.location = "<?php echo site_url(); ?>";
 				}
 				else{
 					$("#alert-msg").html(response.msg);
 					$("#alert-msg").addClass("alert alert-danger");
 				}
-				
-				$(".lds-css").hide();
+
 			}
 		})
 	}
