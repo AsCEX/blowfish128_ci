@@ -38,7 +38,6 @@ class Sms extends CI_Controller {
 		$x = $this->curl->get( $this->sms_url . '?status=0' );
 		$messages = array();
 
-//			print_r($x);
 		if($x){
 			foreach($x->messages as $msg){
 				if($this->session->userdata("phone") == $msg->sender){
