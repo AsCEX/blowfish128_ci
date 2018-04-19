@@ -32,9 +32,18 @@ class Users_model extends CI_Model{
 				WHERE users.phone = '" . trim($mobile) . "'
 				ORDER by user_login.created_date DESC LIMIT 1";
 		
-		$query = $this->db->query($sql);     log_message("debug", $this->db->last_query(), false);
+		$query = $this->db->query($sql);
+		log_message("debug", $this->db->last_query(), false);
 
 		return $query->result();
+	}
+
+
+	public function isVerified($id = 0){
+		$sql = "SELECT * FROM user_login WHERE status = 1 AND id = ?";
+		$query = $this->db->query($sql, array($id));
+
+		return $query->num_rows();
 	}
 
 	public function verifyLogin($id, $data){

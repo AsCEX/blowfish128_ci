@@ -75,40 +75,19 @@ class Sms extends CI_Controller {
 
 		if($diffInSeconds <= $expiry){
 
-		$x = $this->curl->get( $this->sms_url . '?status=0' );
-		$messages = array();
-
-		if($x){
-			foreach($x->messages as $msg){
-				if($this->session->userdata("phone") == $msg->sender){
-					$xor = base64_decode($msg->message);
-					$ct = $this->xor_string($xor, $imei);
-
-					if($ct == $cipher){
-						$messages[] = $msg;
-						break;
-					}
-				}
-			}
-
-			if(count($messages) > 0){
-				$this->curl->put($this->sms_url . $messages[0]->id );
-				$data = array(
-					"verified_date" => date("Y-m-d H:i:s"),
-					"status" => 1
+			$isVerify = $this->users_model->isVerified($this->session->userdata('user_login'));
+			if($isVerify){
+				$result = array(
+					'success' => 1,
+					'msg' => 'Successful'
 				);
-
-				$this->users_model->verifyLogin($this->session->userdata("user_login"), $data);
-				$result['success'] = 1;
 			}else{
-				$result['success'] = 0;
+				$result = array(
+					'success' => 0,
+					'msg' => 'Verifying...'
+				);
 			}
-		}else{
-			$result = array(
-				'success' => 0,
-				'msg' => "Invalid SMS API"
-			);
-		}
+
 		}else{
 			$result = array(
 				'success' => 0,
