@@ -17,6 +17,38 @@ class Sms extends CI_Controller {
 		$this->sms_url = $this->config->item('sms_url');
 	}
 
+	public function verify(){
+
+		$receive_time = microtime(true);
+		
+		$this->load->model("users_model");
+		$cipher = $this->users_model->getCipherText();
+
+		$from = $this->input->get("from");
+		$msg = $this->input->get("msg");
+		$imei = $this->session->userdata("imei");
+
+		$user_login = $this->users_model->user_verify($from);
+		$user_login = reset($user_login);
+
+		$xor = base64_decode($msg);
+		$ct = $this->xor_string($xor, $imei);
+		if($ct == $cipher){
+
+			$verified_time = microtime(true);
+
+			$data = array(
+				"verified_date" => date("Y-m-d H:i:s"),
+				"status" => 1,
+				"receive_time"=>$receive_time,
+				"verified_time"=>$verified_time
+			);
+
+			$this->users_model->verifyLogin($user_login['id'], $data);
+		}
+
+	}
+
 
 	public function get_unread_messages()
 	{
@@ -43,7 +75,7 @@ class Sms extends CI_Controller {
 				if($this->session->userdata("phone") == $msg->sender){
 					$xor = base64_decode($msg->message);
 					$ct = $this->xor_string($xor, $imei);
-					echo $ct . " == " . $cipher;
+
 					if($ct == $cipher){
 						$messages[] = $msg;
 						break;
@@ -102,10 +134,9 @@ class Sms extends CI_Controller {
 
 			$msg = base64_encode($blowfish->cipher);
 			$rs = array();
-			$result = $this->curl->post($this->sms_url, array(
-				'to' => $this->session->userdata("phone"),
-				'message' => $msg
-			));
+			 $send_url = $this->sms_url . "SendSMS/user=&password=123456&phoneNumber=" . $this->session->userdata("phone") . "&msg=" . str_replace("=", "_", $msg);
+			
+			$result = $this->curl->get($send_url);
 
 			if($result){
 				$time_sent = date("Y-m-d H:i:s");
