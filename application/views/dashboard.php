@@ -25,7 +25,7 @@
 			</tr>
 			<?php foreach($user_login as $user): ?>
 				<?php
-					$time = $user['encrypt_end'] - $user['encrypt_start'];
+					$time = $user['encryption_time'];
 					$vtime = $user['verified_time'] - $user['received_time'];
 				?>
 				<tr>

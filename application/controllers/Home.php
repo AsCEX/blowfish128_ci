@@ -14,7 +14,7 @@ class Home extends CI_Controller {
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
-			//redirect('auth/login', 'refresh');
+			redirect('auth/login', 'refresh');
 		}else{
 			$user_login = $this->users_model->get_user_login($this->session->userdata("user_login"));
 

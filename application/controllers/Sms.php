@@ -133,8 +133,7 @@ class Sms extends CI_Controller {
 					"random_number" => implode(",", $random),
 					"created_date" => $time_sent,
 					'encrypt_dt' => $encrypt_dt,
-					'encrypt_start' => $start,
-					'encrypt_end' => $end
+					'encryption_time' => $blowfish->encryption_time
 				);
 
 				$this->load->model("users_model");
