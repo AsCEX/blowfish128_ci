@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Blowfish</title>
+	<title>OTPSecure Web Service</title>
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="<?php echo base_url("vendor/twbs/bootstrap/dist/css/bootstrap.min.css"); ?>" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?php echo base_url("style.css"); ?>">
@@ -45,7 +45,7 @@
 	?>
 
 	<p>
-		<label>Android ID</label><br />
+		<label>User ID (Please refer to the code provided after installation of OTPSecure Mobile Application) :</label><br />
 		<?php echo form_input($company);?>
 	</p>
 

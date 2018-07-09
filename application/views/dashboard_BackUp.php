@@ -25,10 +25,8 @@
 			</tr>
 			<?php foreach($user_login as $user): ?>
 				<?php
-					$time = $user['encryption_time'];
-					//echo $time . "<br />";
-					$vtime = $user['verified_time'] - $user['received_time'];
-					//echo $vtime;
+					$time = $user['encrypt_end'] - $user['encrypt_start'];
+					$vtime = $user['verified_time'] - $user['received_time']; //($user['verified_time'] - $user['received_time'])+ average decryption time;
 				?>
 				<tr>
 					<td><?php echo $user['encrypted_text']; ?></td>

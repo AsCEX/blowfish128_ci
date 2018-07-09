@@ -28,7 +28,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$data['user_login'] = $this->users_model->get_user_login(3);
+		$data['user_login'] = $this->users_model->get_user_login($this->session->userdata('user_login'));
 		$this->load->view('dashboard', $data);
 	}
 }

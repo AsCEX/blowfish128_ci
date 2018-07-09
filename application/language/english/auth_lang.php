@@ -21,7 +21,7 @@
 $lang['error_csrf'] = 'This form post did not pass our security checks.';
 
 // Login
-$lang['login_heading']         = 'Login';
+$lang['login_heading']         = 'OTPSecure Web Login';
 $lang['login_subheading']      = 'Please login with your email/username and password below.';
 $lang['login_identity_label']  = 'Email/Username:';
 $lang['login_password_label']  = 'Password:';
@@ -53,14 +53,14 @@ $lang['deactivate_validation_confirm_label'] = 'confirmation';
 $lang['deactivate_validation_user_id_label'] = 'user ID';
 
 // Create User
-$lang['create_user_heading']                           = 'Create User';
-$lang['create_user_subheading']                        = 'Please enter the user\'s information below.';
+$lang['create_user_heading']                           = 'OTPSecure Web Create User';
+$lang['create_user_subheading']                        = 'Please enter user\'s information below.';
 $lang['create_user_fname_label']                       = 'First Name:';
 $lang['create_user_lname_label']                       = 'Last Name:';
 $lang['create_user_company_label']                     = 'Company Name:';
-$lang['create_user_identity_label']                    = 'Identity:';
-$lang['create_user_email_label']                       = 'Email:';
-$lang['create_user_phone_label']                       = 'Phone:';
+$lang['create_user_identity_label']                    = 'Username:';
+$lang['create_user_email_label']                       = 'Email Address:';
+$lang['create_user_phone_label']                       = 'Phone Number (example: +639198766512) : ';
 $lang['create_user_password_label']                    = 'Password:';
 $lang['create_user_password_confirm_label']            = 'Confirm Password:';
 $lang['create_user_submit_btn']                        = 'Create User';

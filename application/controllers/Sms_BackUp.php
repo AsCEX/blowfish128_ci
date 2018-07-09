@@ -19,23 +19,28 @@ class Sms extends CI_Controller {
 
 	public function verify(){
 
+		$receive_time = microtime(true);
+
+		log_message("debug", "Received Time: " . $receive_time, false);
+
 		$this->load->model("users_model");
-		
-		
+
 		$from = $this->input->get("from");
 		$msg = $this->input->get("msg");
 
 		$user_login = $this->users_model->user_verify($from);
+		log_message("debug", "USER LOGIN: " . print_r($user_login, 1), false);
 		$user_login = reset($user_login);
-		
-
-		$receive_time = microtime(true);
-		
 		$cipher = $this->users_model->getCipherText($user_login->id);
+
+		log_message("debug", "CIPHER TEXT: " . $cipher, false);
+
 		$imei = $user_login->company;
-		
+
 		$xor = base64_decode($msg);
 		$ct = $this->xor_string($xor, $imei);
+
+		log_message("debug", "XOR TEXT: " . $ct, false);
 		if($ct == $cipher){
 
 			$verified_time = microtime(true);
@@ -128,7 +133,8 @@ class Sms extends CI_Controller {
 					"random_number" => implode(",", $random),
 					"created_date" => $time_sent,
 					'encrypt_dt' => $encrypt_dt,
-					'encryption_time' => $blowfish->encryption_time
+					'encrypt_start' => $start,
+					'encrypt_end' => $end
 				);
 
 				$this->load->model("users_model");
